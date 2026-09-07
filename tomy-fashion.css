@@ -1,0 +1,1794 @@
+/* =========================================================
+   TOMI FASHION — Streetwear boutique, Addis Ababa
+   Design tokens
+   ========================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root{
+    /* color — warm, editorial: ivory paper, espresso ink, terracotta accent */
+    --jet:        #2b241f;   /* warm espresso — nav, footer, dark sections */
+    --ink:        #2a231f;   /* body text */
+    --paper:      #f8f1e6;   /* page background */
+    --panel:      #efe3d0;   /* alt section / card background */
+    --line:       #ddceb6;   /* hairline borders */
+    --slate:      #7a6f60;   /* secondary text */
+    --signal:     #b5603d;   /* signal terracotta — the one accent */
+    --signal-rgb: 181,96,61; /* same accent, as r,g,b for rgba() use */
+    --signal-ink: #ffffff;   /* text on signal */
+    --signal-tint:#f3e2d5;   /* pale terracotta tint */
+    --jet-rgb:    43,36,31;  /* --jet as r,g,b for rgba() overlays */
+
+    /* type — serif display for an editorial/boutique feel, clean sans body */
+    --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    --font-body: 'Inter', Arial, sans-serif;
+    --font-mono: 'Inter', Arial, sans-serif;
+
+    /* layout */
+    --radius: 16px;
+    --radius-sm: 9px;
+    --container: 1240px;
+    --gutter: clamp(20px, 5vw, 64px);
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; }
+
+body{
+    font-family: var(--font-body);
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+img{ display:block; max-width:100%; }
+a{ color:inherit; }
+
+h1,h2,h3{ font-family: var(--font-display); font-weight:600; line-height:1.08; letter-spacing:-0.01em; }
+
+::selection{ background: var(--signal); color:#fff; }
+
+:focus-visible{ outline: 3px solid var(--signal); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
+}
+
+/* =========================================================
+   TAG STRIPE — signature motif (repeating diagonal ticket
+   stripe, used at the top ticker and again above the footer)
+   ========================================================= */
+.top-bar{
+    background:
+        repeating-linear-gradient(135deg,
+            var(--jet) 0px, var(--jet) 22px,
+            #453a2e 22px, #453a2e 24px);
+    color:#fff;
+    overflow:hidden;
+    white-space:nowrap;
+    padding:9px 0;
+    font-family: var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.03em;
+    border-bottom: 3px solid var(--signal);
+}
+
+.top-bar-content{
+    display:inline-block;
+    padding-left:100%;
+    animation: scrollText 26s linear infinite;
+}
+
+.top-bar-content p{ color:#f2f2f2; }
+
+@keyframes scrollText{
+    0%{ transform: translateX(0); }
+    100%{ transform: translateX(-100%); }
+}
+
+/* =========================================================
+   HEADER / NAV
+   ========================================================= */
+header{
+    background: rgba(var(--jet-rgb),0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 20px var(--gutter);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: padding 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+header.is-scrolled{
+    padding: 12px var(--gutter);
+    background: rgba(var(--jet-rgb),0.97);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:24px;
+    max-width: var(--container);
+    margin:0 auto;
+    flex-wrap: wrap;
+}
+
+/* ---------- LOGO ---------- */
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+    color:#fff;
+}
+.logo-mark{
+    flex-shrink:0;
+    display:block;
+    transition: transform 0.35s cubic-bezier(.2,.8,.2,1);
+}
+.logo:hover .logo-mark{ transform: rotate(-8deg) scale(1.05); }
+.logo-badge{ fill: var(--signal); }
+
+.logo-word{
+    font-family: var(--font-display);
+    font-size:19px;
+    line-height:1;
+    letter-spacing:0.01em;
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+}
+.logo-word b{
+    font-weight:normal;
+    color:#fff;
+}
+.logo-word span{
+    font-family: var(--font-mono);
+    font-size:9px;
+    letter-spacing:0.28em;
+    color: var(--signal);
+    text-transform:uppercase;
+}
+
+/* ---------- NAV LINKS ---------- */
+.nav-links{
+    list-style:none;
+    display:flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.nav-links li{ margin-left: 4px; }
+
+.nav-links a{
+    position:relative;
+    text-decoration:none;
+    color:#cabfae;
+    font-family: var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding: 8px 4px;
+    margin: 0 8px;
+    transition: color 0.25s ease;
+}
+
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    left:50%; right:50%;
+    bottom:2px;
+    height:2px;
+    background: var(--signal);
+    transition: left 0.28s cubic-bezier(.2,.8,.2,1), right 0.28s cubic-bezier(.2,.8,.2,1);
+}
+
+.nav-links a:hover{ color:#fff; }
+.nav-links a:hover::after{ left:0; right:0; }
+
+/* SEARCH */
+.search-box{ margin-left: 10px; }
+
+.search-box input{
+    background: rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.14);
+    color:#fff;
+    padding:9px 16px;
+    border-radius:999px;
+    outline:none;
+    width:170px;
+    font-family: var(--font-body);
+    font-size:13px;
+    transition: all 0.3s ease;
+}
+
+.search-box input::placeholder{ color: rgba(255,255,255,0.4); }
+
+.search-box input:focus{
+    width:220px;
+    border-color: var(--signal);
+    background: rgba(255,255,255,0.1);
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero{
+    position:relative;
+    min-height: 88vh;
+    background: url("../Pictures/Hoodie/hoodie1_2.jpg") center 20%/cover no-repeat;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    padding: 0 var(--gutter);
+    overflow:hidden;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: linear-gradient(100deg, rgba(var(--jet-rgb),0.92) 0%, rgba(var(--jet-rgb),0.55) 48%, rgba(var(--jet-rgb),0.25) 100%);
+}
+
+.hero::after{
+    /* corner stamp */
+    content:"EST. ADDIS ABABA";
+    position:absolute;
+    top: 32px;
+    right: var(--gutter);
+    z-index:2;
+    font-family: var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.14em;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.4);
+    padding: 8px 14px;
+    border-radius: 999px;
+    transform: rotate(3deg);
+}
+
+.hero-content{
+    position:relative;
+    z-index:1;
+    color:#fff;
+    max-width:640px;
+}
+
+.hero-eyebrow{
+    display:inline-block;
+    font-family: var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color: var(--signal);
+    background: rgba(var(--signal-rgb),0.14);
+    border: 1px solid rgba(var(--signal-rgb),0.45);
+    padding: 7px 14px;
+    border-radius: 999px;
+    margin-bottom: 22px;
+}
+
+.hero-content h1{
+    font-size: clamp(38px, 6vw, 68px);
+    text-transform:uppercase;
+}
+
+.hero-content .lede{
+    margin-top:18px;
+    font-size: 17px;
+    color: #d9cbb4;
+    max-width: 460px;
+}
+
+.hero-actions{
+    display:flex;
+    gap:14px;
+    margin-top:32px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    display:inline-block;
+    padding: 14px 30px;
+    background: var(--signal);
+    color:#fff;
+    text-decoration:none;
+    font-family: var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    border-radius:999px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 10px 26px rgba(var(--signal-rgb),0.28);
+}
+
+.btn:hover{ transform: translateY(-3px); box-shadow: 0 14px 32px rgba(var(--signal-rgb),0.4); }
+
+.btn-ghost{
+    display:inline-block;
+    padding:13px 28px;
+    border:1px solid rgba(255,255,255,0.5);
+    color:#fff;
+    text-decoration:none;
+    font-family: var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    border-radius:999px;
+    transition: background 0.25s ease, border-color 0.25s ease;
+}
+.btn-ghost:hover{ background: rgba(255,255,255,0.1); border-color:#fff; }
+
+/* =========================================================
+   SECTION HEADERS (shared)
+   ========================================================= */
+.section-eyebrow{
+    display:block;
+    font-family: var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color: var(--signal);
+    margin-bottom:10px;
+}
+
+/* =========================================================
+   CATEGORIES
+   ========================================================= */
+.categories{
+    padding: 112px var(--gutter);
+    text-align:center;
+    background: var(--paper);
+}
+
+.categories h2{
+    font-size: clamp(28px, 4vw, 40px);
+    text-transform:uppercase;
+}
+
+.category-grid{
+    margin-top:52px;
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap:22px;
+    max-width: var(--container);
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.category-card{
+    position:relative;
+    height:300px;
+    border-radius: var(--radius);
+    overflow:hidden;
+    background: var(--bg) center/cover no-repeat;
+    text-decoration:none;
+    display:flex;
+    align-items:flex-end;
+    justify-content:flex-start;
+    transition: transform 0.45s cubic-bezier(.2,.8,.2,1);
+}
+
+.category-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: linear-gradient(180deg, rgba(var(--jet-rgb),0.05) 40%, rgba(var(--jet-rgb),0.82) 100%);
+    transition: 0.4s ease;
+}
+
+.category-card:hover{ transform: scale(1.035); }
+.category-card:hover::before{ background: linear-gradient(180deg, rgba(var(--jet-rgb),0.15) 30%, rgba(var(--jet-rgb),0.9) 100%); }
+
+.category-overlay{
+    position:relative;
+    z-index:2;
+    color:#fff;
+    text-align:left;
+    padding: 22px;
+    width:100%;
+    transform: translateY(6px);
+    transition: 0.4s ease;
+}
+
+.category-card:hover .category-overlay{ transform: translateY(0); }
+
+.category-overlay h3{
+    font-size:19px;
+    letter-spacing:0.01em;
+    text-transform:uppercase;
+}
+
+.category-overlay p{
+    font-family: var(--font-mono);
+    font-size:12px;
+    margin-top:6px;
+    color: #d9cbb4;
+}
+
+.category-card::after{
+    content:"SHOP →";
+    position:absolute;
+    top:18px;
+    right:18px;
+    z-index:2;
+    font-family: var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.08em;
+    color:#fff;
+    background: var(--signal);
+    padding:6px 12px;
+    border-radius:999px;
+    opacity:0;
+    transform: translateY(-6px);
+    transition: 0.3s ease;
+}
+
+.category-card:hover::after{ opacity:1; transform: translateY(0); }
+
+/* =========================================================
+   STORE BACKGROUND SECTION
+   ========================================================= */
+.store-bg{
+    position:relative;
+    height:60vh;
+    background: var(--bg-image) center/cover no-repeat;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.store-bg::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: rgba(8,8,9,0.55);
+}
+
+.store-overlay{
+    position:relative;
+    z-index:1;
+    color:#fff;
+    text-align:center;
+    max-width:560px;
+    padding: 0 20px;
+}
+
+.store-overlay h2{
+    font-size: clamp(26px,4vw,40px);
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+}
+
+.store-overlay p{
+    margin-top:12px;
+    font-family: var(--font-mono);
+    font-size:13px;
+    color:#e6dcc8;
+    letter-spacing:0.03em;
+}
+
+/* =========================================================
+   PRODUCTS
+   ========================================================= */
+.products{
+    padding: 112px var(--gutter);
+    text-align:center;
+    background: var(--panel);
+}
+
+.products h2{
+    font-size: clamp(28px, 4vw, 40px);
+    text-transform:uppercase;
+}
+
+.filter-buttons{
+    text-align:center;
+    margin: 34px 0 6px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.filter-buttons button{
+    padding: 9px 20px;
+    border: 1px solid var(--jet);
+    background: transparent;
+    color: var(--jet);
+    font-family: var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    border-radius:999px;
+    cursor:pointer;
+    transition: 0.25s ease;
+}
+
+.filter-buttons button:hover{
+    background: var(--jet);
+    color:#fff;
+}
+
+.product-grid{
+    position:relative;
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
+    justify-content:center;
+    gap:26px;
+    margin-top:44px;
+}
+
+.product-card{
+    background:#fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding:18px 18px 22px;
+    text-align:left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    /* Cards in the same row don't all have the same content height — a
+       discount badge can wrap the price onto two lines, and some products
+       have a size picker and others don't. .product-grid's grid rows
+       stretch every card to match the tallest one in that row (default
+       grid align-items:stretch), so turning the card into a column flex
+       box and letting the button's margin-top:auto soak up the leftover
+       space keeps "Add to Cart" pinned to the same bottom edge on every
+       card, instead of trailing right after whatever content happens to
+       be above it. */
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.product-card:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(var(--jet-rgb),0.1);
+}
+
+.product-card img{
+    width:100%;
+    height:270px;
+    object-fit:contain;
+    background:#fbfbfa;
+    border-radius: var(--radius-sm);
+}
+
+.product-card h3{
+    /* was 16px; the flex container's own 8px `gap` now adds the rest so
+       the visual spacing above the name is unchanged */
+    margin-top:8px;
+    font-family: var(--font-body);
+    font-weight:700;
+    font-size:15px;
+    text-transform:none;
+    letter-spacing:0;
+}
+
+.product-card p{
+    display:inline-block;
+    /* was 8px; the flex container's own 8px `gap` now covers this spacing */
+    margin-top:0;
+    font-family: var(--font-mono);
+    font-size:13px;
+    background: var(--jet);
+    color:#fff;
+    padding:5px 12px;
+    border-radius:999px;
+}
+
+.product-card button{
+    display:block;
+    /* auto pushes the button to the bottom of the (now flex, stretched)
+       card — see the .product-card comment above. The container's own
+       `gap` still guarantees a minimum breathing-room above it even when
+       there's no extra row height to soak up. */
+    margin-top:auto;
+    padding:11px;
+    width:100%;
+    border:none;
+    background: var(--signal);
+    color:#fff;
+    font-family: var(--font-mono);
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    border-radius: var(--radius-sm);
+    cursor:pointer;
+    transition: opacity 0.2s ease;
+}
+.product-card button:hover{ opacity:0.85; }
+
+.product-card.hide{
+    opacity:0;
+    transform:scale(0.95);
+    pointer-events:none;
+    position:absolute;
+    display:none;
+}
+
+/* product image + color swatches */
+.product-image{ position:relative; overflow:hidden; border-radius: var(--radius-sm); }
+
+.product-image img{
+    width:100%;
+    height:270px;
+    object-fit:contain;
+    background:#fbfbfa;
+    transition: opacity 0.3s ease, transform 0.4s ease;
+}
+
+.product-card:hover .main-image{ transform: scale(1.04); }
+
+/* Compact swatch row — small dots, tight spacing, minimal added height
+   under the photo instead of a full extra block.
+   NOTE: swatches are real <button> elements (for accessibility), so every
+   rule here is scoped as `.color-options .color` — two classes beats the
+   site-wide `.product-card button` rule (class+type) that otherwise makes
+   any bare <button> inside a card stretch full-width like "Add to Cart".
+   Every property that rule sets is explicitly reset below. */
+.color-options{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-top:6px;
+    /* Reserved even when empty (see products-api.js) — 16px dot + 1.5px
+       border each side — so every card's title/price starts at the same
+       y-position whether or not that product has color swatches. */
+    min-height:19px;
+}
+
+.color-options .color{
+    box-sizing:border-box;
+    display:inline-flex;
+    position:relative;
+    align-items:center;
+    justify-content:center;
+    width:16px;
+    height:16px;
+    margin-top:0;
+    padding:0;
+    border:1.5px solid #fff;
+    border-radius:50%;
+    box-shadow: 0 0 0 1px var(--line);
+    background-clip:padding-box;
+    font-size:0;
+    -webkit-appearance:none;
+    appearance:none;
+    cursor:pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.color-options .color:hover{ transform: scale(1.15); box-shadow: 0 0 0 1px var(--jet); }
+.color-options .color:focus-visible{ outline: 2px solid var(--signal); outline-offset: 2px; }
+
+.color-options .color.active{
+    box-shadow: 0 0 0 2px var(--signal);
+}
+
+/* checkmark on the active swatch so the current selection reads clearly
+   even on very light or very dark colors, not just via the ring */
+.color-options .color.active::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    margin:auto;
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background: var(--signal);
+    box-shadow: 0 0 0 1.5px rgba(255,255,255,0.9);
+}
+
+.color-brown-olive{
+    background: linear-gradient(135deg, #4b2e2b 48%, #e5e5e5 49%, #e5e5e5 51%, #7a7d3a 52%);
+}
+
+.color-three{
+    background: linear-gradient(135deg, #a3a5ae 0%, #a3a5ae 33.33%, #635d5d 33.33%, #635d5d 66.66%, #151618 66.66%, #232428 100%);
+}
+
+.image-options{ display:flex; justify-content:center; gap:8px; margin-top:10px; }
+
+/* SLIDER (shoes page) */
+.slider{ position:relative; overflow:hidden; height:270px; border-radius: var(--radius-sm); }
+
+.slide{
+    position:absolute;
+    width:100%; height:100%;
+    object-fit:contain;
+    background:#fbfbfa;
+    top:0; left:100%;
+    transition: left 0.4s ease;
+}
+.slide.active{ left:0; }
+
+/* Same specificity trap documented above for .wishlist-btn/.quickview-btn:
+   a bare `.arrow` class (0,1,0) loses to `.product-card button` (0,1,1),
+   which is why this used to render as a full-width Add-to-Cart-style bar
+   instead of a small round nav button. Scoping under `.product-card` fixes it. */
+.product-card .arrow{
+    position:absolute;
+    top:50%;
+    left:auto;
+    transform: translateY(-50%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0;
+    background:#fff;
+    color: var(--jet);
+    border:none;
+    width:34px; height:34px;
+    padding:0;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:16px;
+    text-transform:none;
+    letter-spacing:normal;
+    opacity:0;
+    box-shadow: 0 4px 12px rgba(var(--jet-rgb),0.15);
+    transition: background 0.2s ease, color 0.2s ease, opacity 0.3s ease;
+}
+.product-card .slider:hover .arrow{ opacity:1; }
+.product-card .arrow.left{ left:10px; right:auto; }
+.product-card .arrow.right{ right:10px; }
+.product-card .arrow:hover{ background: var(--signal); color:#fff; }
+
+/* =========================================================
+   PROMO — diagonal stripe banner (signature reuse)
+   ========================================================= */
+.promo{
+    position:relative;
+    background: var(--jet);
+    color:#fff;
+    text-align:center;
+    padding: 100px 20px;
+    overflow:hidden;
+}
+
+.promo::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: repeating-linear-gradient(135deg,
+        transparent 0px, transparent 46px,
+        rgba(var(--signal-rgb),0.12) 46px, rgba(var(--signal-rgb),0.12) 48px);
+    pointer-events:none;
+}
+
+.promo h2{
+    position:relative;
+    font-size: clamp(28px, 5vw, 46px);
+    text-transform:uppercase;
+    color: var(--signal);
+}
+
+.promo p{
+    position:relative;
+    margin-top:14px;
+    font-family: var(--font-mono);
+    font-size:13px;
+    letter-spacing:0.04em;
+    color:#d9cbb4;
+}
+
+.btn-dark{
+    display:inline-block;
+    margin-top:26px;
+    background:#fff;
+    color: var(--jet);
+    padding:13px 28px;
+    text-decoration:none;
+    font-family: var(--font-mono);
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    border-radius:999px;
+}
+
+/* =========================================================
+   ABOUT
+   ========================================================= */
+.about{
+    padding: 112px var(--gutter);
+    max-width: var(--container);
+    margin: 0 auto;
+    display:grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 60px;
+    align-items:center;
+    text-align:left;
+}
+
+.about h2{
+    font-size: clamp(26px, 4vw, 38px);
+    text-transform:uppercase;
+}
+
+.about p{
+    margin-top:16px;
+    color: var(--slate);
+    font-size:15.5px;
+    max-width:520px;
+}
+
+.about-visual{
+    height:340px;
+    border-radius: var(--radius);
+    background: url("../Pictures/Bg/bg2.jpg") center/cover no-repeat;
+    position:relative;
+}
+
+.about-visual::after{
+    content:"TOMI";
+    position:absolute;
+    bottom:18px; left:18px;
+    color:#fff;
+    font-family: var(--font-display);
+    font-size:22px;
+    letter-spacing:0.02em;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+/* =========================================================
+   NEWSLETTER
+   ========================================================= */
+.newsletter{
+    text-align:center;
+    padding: 100px 24px;
+    background: var(--panel);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+}
+
+.newsletter h2{
+    font-size: clamp(24px,3.4vw,32px);
+    text-transform:uppercase;
+}
+
+.newsletter p{
+    margin-top:10px;
+    color: var(--slate);
+    font-family: var(--font-mono);
+    font-size:13px;
+}
+
+.newsletter form,
+.newsletter input{
+    font-family: var(--font-body);
+}
+
+.newsletter input{
+    margin-top:26px;
+    padding:13px 20px;
+    width:280px;
+    max-width:70vw;
+    border:1px solid var(--line);
+    border-radius:999px 0 0 999px;
+    outline:none;
+    border-right:none;
+}
+.newsletter input:focus{ border-color: var(--signal); }
+
+.newsletter button{
+    padding:13px 26px;
+    border:none;
+    background: var(--jet);
+    color:#fff;
+    font-family: var(--font-mono);
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    border-radius:0 999px 999px 0;
+    cursor:pointer;
+    transition: background 0.25s ease;
+}
+.newsletter button:hover{ background: var(--signal); }
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer{
+    background: var(--jet);
+    color:#fff;
+    padding: 60px var(--gutter) 30px;
+    border-top: 3px solid var(--signal);
+}
+
+.footer-grid{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:36px;
+    max-width: var(--container);
+    margin: 0 auto 30px;
+    text-align:left;
+}
+
+.footer-grid h3{
+    font-size:19px;
+    text-transform:uppercase;
+}
+
+.footer-grid h4{
+    font-family: var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color: var(--signal);
+    margin-bottom:10px;
+}
+
+footer p{
+    margin-top:8px;
+    color:#d3c6ae;
+    font-size:14px;
+}
+
+.copyright{
+    text-align:center;
+    font-family: var(--font-mono);
+    font-size:12px;
+    color:#a3937d;
+    padding-top:22px;
+    border-top:1px solid rgba(255,255,255,0.1);
+    max-width: var(--container);
+    margin:0 auto;
+}
+
+/* =========================================================
+   SCROLL REVEAL (progressive enhancement — safe no-JS fallback)
+   ========================================================= */
+.reveal{ transition: opacity 0.7s ease, transform 0.7s ease; }
+.js .reveal{ opacity:0; transform: translateY(24px); }
+.js .reveal.in{ opacity:1; transform:none; }
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 980px){
+    .about{ grid-template-columns: 1fr; }
+    .about-visual{ order:-1; height:240px; }
+    .category-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 720px){
+    header{ padding: 14px 20px; }
+    .navbar{ justify-content:center; text-align:center; }
+    .search-box{ margin-left:0; width:100%; display:flex; justify-content:center; }
+    .search-box input{ width:100%; max-width:280px; }
+    .nav-links{ justify-content:center; }
+
+    .hero{ min-height:78vh; justify-content:center; text-align:center; padding: 0 24px; }
+    .hero-content{ max-width:100%; }
+    .hero-actions{ justify-content:center; }
+    .hero::after{ display:none; }
+
+    .categories, .products, .about, .newsletter, footer{ padding-left:24px; padding-right:24px; }
+    .category-grid{ grid-template-columns: 1fr; }
+    .footer-grid{ text-align:center; justify-content:center; }
+}
+
+@media (max-width: 420px){
+    .top-bar{ font-size:11px; }
+    .hero-content h1{ font-size: 34px; }
+    .newsletter input{ width:100%; max-width:220px; }
+}
+
+/* =========================================================
+   SHOP UI — floating buttons, slide-in drawers, quick view,
+   toast (cart.js). Cart and wishlist share the same visual
+   system via .tomi-overlay / .tomi-drawer.
+   ========================================================= */
+#tomiCartFab, #tomiWishFab, #tomiChatFab{
+    position: fixed;
+    right: 22px;
+    z-index: 200;
+    background: var(--jet);
+    color:#fff;
+    border:none;
+    width:56px;
+    height:56px;
+    border-radius:50%;
+    font-size:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    box-shadow: 0 12px 28px rgba(var(--jet-rgb),0.35);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+#tomiCartFab{ bottom: 22px; }
+#tomiWishFab{ bottom: 92px; }
+#tomiChatFab{ bottom: 162px; background: var(--signal); }
+#tomiCartFab:hover, #tomiWishFab:hover, #tomiChatFab:hover{ transform: translateY(-3px); }
+#tomiCartFab.pulse, #tomiWishFab.pulse, #tomiChatFab.pulse{ animation: tomiFabPulse 0.5s ease; }
+/* Any drawer (cart / wishlist / chat) covers the same right-hand slot the
+   FABs sit in — hide them while a panel is open so they can't float on top
+   of and intercept clicks meant for the panel underneath. */
+body.tomi-panel-open #tomiCartFab,
+body.tomi-panel-open #tomiWishFab,
+body.tomi-panel-open #tomiChatFab{
+    opacity:0;
+    pointer-events:none;
+    transform: translateY(8px);
+}
+@keyframes tomiFabPulse{
+    0%{ transform: scale(1); }
+    40%{ transform: scale(1.18); }
+    100%{ transform: scale(1); }
+}
+
+#tomiCartCount, #tomiWishCount{
+    position:absolute;
+    top:-4px; right:-4px;
+    background: var(--signal);
+    color:#fff;
+    font-family: var(--font-mono);
+    font-size:11px;
+    min-width:20px;
+    height:20px;
+    border-radius:999px;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:0 5px;
+    border: 2px solid var(--paper);
+}
+
+.tomi-overlay{
+    position:fixed;
+    inset:0;
+    background: rgba(var(--jet-rgb),0.5);
+    opacity:0;
+    pointer-events:none;
+    transition: opacity 0.3s ease;
+    z-index:198;
+}
+.tomi-overlay.open{ opacity:1; pointer-events:auto; }
+
+.tomi-drawer{
+    position:fixed;
+    top:0;
+    height:100vh;
+    width:min(380px, 92vw);
+    background: var(--paper);
+    z-index:199;
+    display:flex;
+    flex-direction:column;
+    transition: transform 0.35s cubic-bezier(.2,.8,.2,1);
+    box-shadow: -20px 0 50px rgba(var(--jet-rgb),0.25);
+}
+.tomi-drawer-right{ right:0; transform: translateX(100%); }
+.tomi-drawer-right.open{ transform: translateX(0); }
+
+.tomi-cart-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 22px 22px 16px;
+    border-bottom: 1px solid var(--line);
+}
+.tomi-cart-head h3{ font-size:18px; text-transform:uppercase; }
+.tomi-cart-head button{
+    background:none;
+    border:none;
+    font-size:26px;
+    line-height:1;
+    cursor:pointer;
+    color: var(--slate);
+}
+
+#tomiCartItems, #tomiWishItems{
+    flex:1;
+    overflow-y:auto;
+    padding: 16px 22px;
+}
+
+.tomi-cart-empty{
+    color: var(--slate);
+    font-size:14px;
+    margin-top:30px;
+    text-align:center;
+}
+
+.tomi-cart-item{
+    display:flex;
+    gap:12px;
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+    align-items:flex-start;
+}
+.tomi-cart-item img{
+    width:64px;
+    height:64px;
+    object-fit:contain;
+    background:#fbfbfa;
+    border:1px solid var(--line);
+    border-radius: var(--radius-sm);
+}
+.tomi-cart-item-info{ flex:1; }
+.tomi-cart-item-name{ font-size:13.5px; font-weight:600; }
+.tomi-cart-item-price{
+    font-family: var(--font-mono);
+    font-size:12px;
+    color: var(--slate);
+    margin-top:4px;
+}
+.tomi-qty{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:8px;
+}
+.tomi-qty button{
+    width:24px; height:24px;
+    border-radius:50%;
+    border:1px solid var(--jet);
+    background:#fff;
+    cursor:pointer;
+    font-size:14px;
+    line-height:1;
+}
+.tomi-qty span{ font-family: var(--font-mono); font-size:13px; min-width:14px; text-align:center; }
+.tomi-qty button:disabled{ opacity:0.35; cursor:not-allowed; }
+
+.tomi-cart-remove{
+    background:none;
+    border:none;
+    color: var(--signal);
+    font-family: var(--font-mono);
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    cursor:pointer;
+    white-space:nowrap;
+}
+
+.tomi-move-to-bag{
+    display:block;
+    margin-top:8px;
+    background:none;
+    border:1px solid var(--jet);
+    color: var(--jet);
+    font-family: var(--font-mono);
+    font-size:10.5px;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    padding:5px 10px;
+    border-radius:999px;
+    cursor:pointer;
+    transition: 0.2s ease;
+}
+.tomi-move-to-bag:hover{ background: var(--jet); color:#fff; }
+
+.tomi-cart-foot{
+    padding: 18px 22px 24px;
+    border-top: 1px solid var(--line);
+}
+.tomi-cart-subtotal{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:14px;
+    margin-bottom:14px;
+}
+.tomi-cart-subtotal strong{ font-family: var(--font-mono); }
+
+#tomiCartCheckout{
+    display:block;
+    width:100%;
+    text-align:center;
+    box-shadow:none;
+}
+#tomiCartCheckout[aria-disabled="true"]{
+    background: var(--slate);
+    pointer-events:none;
+    box-shadow:none;
+}
+
+/* ---------- wishlist heart / quick-view magnifier on cards ---------- */
+/* Specificity note: `.product-card button` (a global rule further up
+   this file) is (0,1,1). A bare `.wishlist-btn` class is only (0,1,0)
+   and loses that fight, inheriting full-width/pink styling meant for
+   the Add to Cart button. Scoping these to `.product-card` pushes
+   them to (0,2,0), which wins. */
+.product-card .wishlist-btn{
+    position:absolute;
+    top:10px; right:10px;
+    width:40px; height:40px;
+    margin:0;
+    padding:0;
+    border-radius:50%;
+    border:none;
+    background: rgba(255,255,255,0.9);
+    color: var(--ink);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    z-index:3;
+    box-shadow: 0 4px 10px rgba(var(--jet-rgb),0.15);
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+.product-card .wishlist-btn:hover{ transform: scale(1.08); }
+/* same heart shape in both states (see heartIcon() in cart.js) — only the
+   fill and color change between saved / not saved */
+.product-card .wishlist-btn.active{ color: #e0272d; }
+
+.product-card .quickview-btn{
+    position:absolute;
+    top:10px; left:10px;
+    width:32px; height:32px;
+    margin:0;
+    padding:0;
+    border-radius:50%;
+    border:none;
+    background: rgba(255,255,255,0.9);
+    color: var(--ink);
+    font-size:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    z-index:3;
+    box-shadow: 0 4px 10px rgba(var(--jet-rgb),0.15);
+    transition: transform 0.2s ease;
+}
+.product-card .quickview-btn:hover{ transform: scale(1.08); }
+
+/* ---------- price row with % off (badge + old price) ---------- */
+/* Markup pattern for a discounted product:
+   <div class="price-row">
+       <span class="price-now">4,900 Birr</span>
+       <span class="price-was">6,900 Birr</span>
+       <span class="discount-badge">-29%</span>
+   </div>
+   For non-discounted products keep the plain <p>Price Birr</p> — cardMeta()
+   in cart.js reads .price-now first and falls back to the plain <p>, so both
+   forms work side by side until the admin page decides which cards get a badge. */
+.product-card .price-row{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:8px;
+    margin:0;
+}
+.product-card .price-now{
+    font-weight:600;
+    color: var(--ink);
+}
+.product-card .price-was{
+    color: var(--slate);
+    text-decoration: line-through;
+    font-size:0.9em;
+}
+.product-card .discount-badge{
+    background: #e0272d;
+    color:#fff;
+    font-family: var(--font-mono);
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:0.02em;
+    padding:2px 7px;
+    border-radius:999px;
+    line-height:1.5;
+}
+
+/* wishlist heart button when reused inside the quick-view panel (not a card overlay) */
+.wishlist-btn.qv{
+    position:static;
+    width:auto;
+    height:auto;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    border-radius:999px;
+    background:#fff;
+    border:1px solid var(--line);
+    padding:12px 20px;
+    font-family: var(--font-mono);
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    box-shadow:none;
+    margin-top:10px;
+}
+.wishlist-btn.qv.active{ border-color: var(--signal); color: var(--signal); }
+
+/* ---------- quick view modal ---------- */
+#tomiQVModal{
+    position:fixed;
+    top:50%; left:50%;
+    transform: translate(-50%, -48%) scale(0.97);
+    width:min(880px, 92vw);
+    max-height:88vh;
+    overflow-y:auto;
+    background:#fff;
+    border-radius: var(--radius);
+    z-index:201;
+    display:grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap:0;
+    opacity:0;
+    pointer-events:none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    box-shadow: 0 30px 80px rgba(var(--jet-rgb),0.35);
+}
+#tomiQVModal.open{ opacity:1; pointer-events:auto; transform: translate(-50%, -50%) scale(1); }
+
+#tomiQVClose{
+    position:absolute;
+    top:16px; right:16px;
+    width:36px; height:36px;
+    border-radius:50%;
+    border:none;
+    background: var(--panel);
+    font-size:22px;
+    line-height:1;
+    cursor:pointer;
+    z-index:2;
+}
+
+.tomi-qv-gallery{
+    background: var(--panel);
+    padding:32px;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+#tomiQVMainImage{
+    width:100%;
+    height:360px;
+    object-fit:contain;
+}
+.tomi-qv-thumbs{ display:flex; gap:8px; flex-wrap:wrap; }
+.tomi-qv-thumb{
+    width:52px; height:52px;
+    border-radius: var(--radius-sm);
+    border:2px solid transparent;
+    background:#fff;
+    padding:0;
+    overflow:hidden;
+    cursor:pointer;
+}
+.tomi-qv-thumb img{ width:100%; height:100%; object-fit:contain; }
+.tomi-qv-thumb.active{ border-color: var(--signal); }
+
+.tomi-qv-details{
+    padding: 40px 36px;
+    display:flex;
+    flex-direction:column;
+}
+.tomi-qv-details h3{
+    font-size:24px;
+    text-transform:uppercase;
+    padding-right:30px;
+}
+.tomi-qv-price{
+    margin-top:10px;
+    font-family: var(--font-mono);
+    font-size:16px;
+    color: var(--slate);
+}
+.tomi-qv-details .size-select{ margin-top:24px; }
+.tomi-qv-qty{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-top:20px;
+}
+.tomi-qv-qty button{
+    width:28px; height:28px;
+    border-radius:50%;
+    border:1px solid var(--jet);
+    background:#fff;
+    cursor:pointer;
+}
+.tomi-qv-qty span{ font-family: var(--font-mono); min-width:16px; text-align:center; }
+.tomi-qv-qty button:disabled{ opacity:0.35; cursor:not-allowed; }
+.tomi-qv-qty-note{
+    width:100%;
+    font-family: var(--font-mono);
+    font-size:11px;
+    color: var(--slate);
+    margin-top:6px;
+}
+
+.btn-dark-full{
+    display:block;
+    width:100%;
+    text-align:center;
+    margin-top:26px;
+    box-shadow:none;
+}
+
+@media (max-width: 720px){
+    #tomiQVModal{ grid-template-columns: 1fr; }
+    .tomi-qv-gallery{ padding:22px; }
+    #tomiQVMainImage{ height:240px; }
+    .tomi-qv-details{ padding:26px 22px 30px; }
+}
+
+/* ---------- AI support chat (support-chat.js) ---------- */
+.tomi-chat-messages{
+    flex:1;
+    overflow-y:auto;
+    padding: 18px 22px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+.tomi-chat-msg{
+    max-width: 82%;
+    padding: 10px 14px;
+    border-radius: 16px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+.tomi-chat-msg.assistant{
+    align-self:flex-start;
+    background: var(--panel);
+    color: var(--ink);
+    border-bottom-left-radius:4px;
+}
+.tomi-chat-msg.user{
+    align-self:flex-end;
+    background: var(--signal);
+    color: var(--signal-ink);
+    border-bottom-right-radius:4px;
+}
+.tomi-chat-msg.typing{
+    display:flex;
+    gap:4px;
+    align-items:center;
+    padding:12px 16px;
+}
+.tomi-chat-msg.typing span{
+    width:6px; height:6px;
+    border-radius:50%;
+    background: var(--slate);
+    display:inline-block;
+    animation: tomiTypingDot 1.2s infinite ease-in-out;
+}
+.tomi-chat-msg.typing span:nth-child(2){ animation-delay:0.2s; }
+.tomi-chat-msg.typing span:nth-child(3){ animation-delay:0.4s; }
+@keyframes tomiTypingDot{
+    0%, 60%, 100%{ transform: translateY(0); opacity:0.4; }
+    30%{ transform: translateY(-4px); opacity:1; }
+}
+.tomi-chat-suggestions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    padding: 0 22px 14px;
+}
+.tomi-chat-chip{
+    background:#fff;
+    border:1px solid var(--line);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size:12px;
+    padding:7px 13px;
+    border-radius:999px;
+    cursor:pointer;
+    transition: border-color 0.2s ease;
+}
+.tomi-chat-chip:hover{ border-color: var(--signal); }
+.tomi-chat-form{
+    display:flex;
+    gap:10px;
+    padding: 14px 22px 20px;
+    border-top:1px solid var(--line);
+}
+.tomi-chat-form input{
+    flex:1;
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:11px 16px;
+    font-family: var(--font-body);
+    font-size:13.5px;
+    outline:none;
+    background:#fff;
+    color: var(--ink);
+}
+.tomi-chat-form input:focus{ border-color: var(--signal); }
+.tomi-chat-form button{
+    width:42px; height:42px;
+    border-radius:50%;
+    border:none;
+    background: var(--signal);
+    color:#fff;
+    font-size:16px;
+    cursor:pointer;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition: transform 0.15s ease;
+}
+.tomi-chat-form button:hover{ transform: scale(1.05); }
+.tomi-chat-form button:disabled{ opacity:0.5; cursor:not-allowed; transform:none; }
+
+/* ---------- toast ---------- */
+#tomiToast{
+    position:fixed;
+    top:18px;
+    right:22px;
+    z-index:250;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 16px 36px rgba(var(--jet-rgb),0.2);
+    padding:12px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    max-width:320px;
+    transform: translateY(-16px);
+    opacity:0;
+    pointer-events:none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+#tomiToast.show{ transform: translateY(0); opacity:1; pointer-events:auto; }
+#tomiToast img{
+    width:44px; height:44px;
+    object-fit:contain;
+    background:#fbfbfa;
+    border-radius:6px;
+    flex-shrink:0;
+}
+.tomi-toast-info{ flex:1; display:flex; flex-direction:column; gap:2px; }
+.tomi-toast-info strong{ font-size:12.5px; }
+.tomi-toast-info span{ font-family: var(--font-mono); font-size:11px; color: var(--slate); }
+#tomiToastView{
+    background: var(--jet);
+    color:#fff;
+    border:none;
+    border-radius:999px;
+    padding:7px 12px;
+    font-family: var(--font-mono);
+    font-size:10.5px;
+    text-transform:uppercase;
+    cursor:pointer;
+    white-space:nowrap;
+}
+
+@media (max-width: 480px){
+    #tomiToast{ left:14px; right:14px; max-width:none; }
+}
+
+/* ---------- nav active-page indicator ---------- */
+.nav-links a.active{
+    color:#fff;
+}
+.nav-links a.active::after{ left:0; right:0; }
+
+/* =========================================================
+   PRODUCT GRID — loading / empty / error states (products-api.js)
+   ========================================================= */
+.products-loading,
+.products-empty,
+.products-error{
+    grid-column: 1 / -1;
+    font-family: var(--font-mono);
+    font-size:13px;
+    color: var(--slate);
+    text-align:center;
+    padding:40px 0;
+}
+.products-error{
+    color: var(--signal);
+}
+
+/* =========================================================
+   SEARCH — "no results" feedback (search.js)
+   ========================================================= */
+.no-results{
+    display:none;
+    margin-top:30px;
+    font-family: var(--font-mono);
+    font-size:13px;
+    color: var(--slate);
+}
+
+/* =========================================================
+   NEWSLETTER — inline status message (tomy-fashion.js)
+   ========================================================= */
+.newsletter-status{
+    margin-top:14px;
+    font-family: var(--font-mono);
+    font-size:12.5px;
+}
+.newsletter-status.ok{ color:#1a7a3d; }
+.newsletter-status.error{ color: var(--signal); }
+
+/* =========================================================
+   SIZE SELECTOR (cart.js) — scoped to override the generic
+   full-width `.product-card button` styling
+   ========================================================= */
+.product-card .size-select, #tomiQVModal .size-select{
+    display:flex;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-top:14px;
+}
+.product-card .size-select .size-label, #tomiQVModal .size-select .size-label{
+    font-family: var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color: var(--slate);
+    margin-right:2px;
+}
+.product-card .size-select button.size-pill, #tomiQVModal .size-select button.size-pill{
+    width:auto;
+    display:inline-block;
+    padding:6px 11px;
+    margin:0;
+    background:#fff;
+    color: var(--ink);
+    border:1px solid var(--line);
+    border-radius:999px;
+    font-family: var(--font-mono);
+    font-size:12px;
+    cursor:pointer;
+    transition: 0.2s ease;
+}
+.product-card .size-select button.size-pill:hover, #tomiQVModal .size-select button.size-pill:hover{ border-color: var(--jet); }
+.product-card .size-select button.size-pill.active, #tomiQVModal .size-select button.size-pill.active{
+    background: var(--jet);
+    border-color: var(--jet);
+    color:#fff;
+}
+.product-card .size-select.size-required, #tomiQVModal .size-select.size-required{ animation: sizeShake 0.35s ease; }
+.product-card .size-select.size-required .size-label, #tomiQVModal .size-select.size-required .size-label{ color: var(--signal); }
+.product-card .size-select.size-required button.size-pill, #tomiQVModal .size-select.size-required button.size-pill{ border-color: var(--signal); }
+
+.product-card .size-select button.size-pill.out-of-stock, #tomiQVModal .size-select button.size-pill.out-of-stock{
+    position: relative;
+    background: var(--panel);
+    color: var(--slate);
+    border-color: var(--line);
+    text-decoration: line-through;
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+.product-card .size-select button.size-pill.out-of-stock:hover, #tomiQVModal .size-select button.size-pill.out-of-stock:hover{ border-color: var(--line); }
+
+/* Tooltip on hover/focus for out-of-stock sizes — replaces the old
+   "just looks broken" strikethrough-with-no-explanation state. */
+.product-card .size-select button.size-pill.out-of-stock::after,
+#tomiQVModal .size-select button.size-pill.out-of-stock::after{
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background: var(--jet);
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.03em;
+    text-transform: none;
+    white-space: nowrap;
+    padding: 5px 9px;
+    border-radius: 6px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    z-index: 6;
+}
+.product-card .size-select button.size-pill.out-of-stock::before,
+#tomiQVModal .size-select button.size-pill.out-of-stock::before{
+    content: "";
+    position: absolute;
+    bottom: calc(100% + 4px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid transparent;
+    border-top-color: var(--jet);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s ease;
+    z-index: 6;
+}
+.product-card .size-select button.size-pill.out-of-stock:hover::after,
+.product-card .size-select button.size-pill.out-of-stock:focus-visible::after,
+#tomiQVModal .size-select button.size-pill.out-of-stock:hover::after,
+#tomiQVModal .size-select button.size-pill.out-of-stock:focus-visible::after{
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+.product-card .size-select button.size-pill.out-of-stock:hover::before,
+.product-card .size-select button.size-pill.out-of-stock:focus-visible::before,
+#tomiQVModal .size-select button.size-pill.out-of-stock:hover::before,
+#tomiQVModal .size-select button.size-pill.out-of-stock:focus-visible::before{
+    opacity: 1;
+    visibility: visible;
+}
+
+/* The tooltip above is centered on its button by default, which is fine
+   for pills in the middle of the row — but for the last size in the row
+   (very commonly the out-of-stock one, e.g. biggest shoe size), centering
+   pushes half the tooltip past the card's right edge, where it gets
+   clipped/overlapped by whatever sits next to the card. Anchor the last
+   and first pill's tooltips to that inner edge instead of centering them. */
+.product-card .size-select button.size-pill.out-of-stock:last-of-type::after,
+#tomiQVModal .size-select button.size-pill.out-of-stock:last-of-type::after{
+    left: auto;
+    right: 0;
+    transform: translateY(4px);
+}
+.product-card .size-select button.size-pill.out-of-stock:last-of-type:hover::after,
+.product-card .size-select button.size-pill.out-of-stock:last-of-type:focus-visible::after,
+#tomiQVModal .size-select button.size-pill.out-of-stock:last-of-type:hover::after,
+#tomiQVModal .size-select button.size-pill.out-of-stock:last-of-type:focus-visible::after{
+    transform: translateY(0);
+}
+.product-card .size-select button.size-pill.out-of-stock:last-of-type::before,
+#tomiQVModal .size-select button.size-pill.out-of-stock:last-of-type::before{
+    left: auto;
+    right: 12px;
+    transform: none;
+}
+
+.product-card .size-select button.size-pill.out-of-stock:first-of-type::after,
+#tomiQVModal .size-select button.size-pill.out-of-stock:first-of-type::after{
+    left: 0;
+    transform: translateY(4px);
+}
+.product-card .size-select button.size-pill.out-of-stock:first-of-type:hover::after,
+.product-card .size-select button.size-pill.out-of-stock:first-of-type:focus-visible::after,
+#tomiQVModal .size-select button.size-pill.out-of-stock:first-of-type:hover::after,
+#tomiQVModal .size-select button.size-pill.out-of-stock:first-of-type:focus-visible::after{
+    transform: translateY(0);
+}
+.product-card .size-select button.size-pill.out-of-stock:first-of-type::before,
+#tomiQVModal .size-select button.size-pill.out-of-stock:first-of-type::before{
+    left: 12px;
+    transform: none;
+}
+
+.product-card .size-select .stock-note, #tomiQVModal .size-select .stock-note{
+    width: 100%;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    margin-top: 2px;
+    min-height: 14px;
+}
+.stock-note.ok{ color: #2a9d5c; }
+.stock-note.low{ color: #d18f1c; }
+.stock-note.out{ color: var(--signal); }
+
+@keyframes sizeShake{
+    0%, 100%{ transform: translateX(0); }
+    25%{ transform: translateX(-4px); }
+    75%{ transform: translateX(4px); }
+}
+
+.tomi-cart-item-size{
+    font-weight:400;
+    color: var(--slate);
+    font-size:12.5px;
+}
+
+/* filter-buttons: selected state (buttons already styled — see .products) */
+.filter-buttons button.active{
+    background: var(--jet);
+    color:#fff;
+}
