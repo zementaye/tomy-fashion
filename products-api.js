@@ -1,7 +1,7 @@
 /*
  * products-api.js
  * ----------------
- * Shared by tomy-fashion.html, pages/products.html and every pages/<category>.html.
+ * Shared by index.html, pages/products.html and every pages/<category>.html.
  * Fetches the product catalog from the admin backend and renders the same
  * .product-card markup the site's CSS already styles (simple / color-swatch /
  * multi-image slider), so the storefront always reflects whatever was last

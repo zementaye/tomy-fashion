@@ -344,6 +344,16 @@ def chat():
     return jsonify({"reply": reply})
 
 
+@app.route("/", methods=["GET"])
+def root():
+    return jsonify({
+        "service": "Tomi Fashion API",
+        "status": "running",
+        "health": "/api/health",
+        "products": "/api/products",
+    })
+
+
 @app.route("/api/health", methods=["GET"])
 def health():
     return jsonify({
